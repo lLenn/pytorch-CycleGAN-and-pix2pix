@@ -1,4 +1,9 @@
 FILE=$1
+if [ -z $2 ]; then
+    TARGET_DIR=./datasets/
+else
+    TARGET_DIR=$2
+fi
 
 if [[ $FILE != "cityscapes" && $FILE != "night2day" && $FILE != "edges2handbags" && $FILE != "edges2shoes" && $FILE != "facades" && $FILE != "maps" ]]; then
   echo "Available datasets are cityscapes, night2day, edges2handbags, edges2shoes, facades, maps"
@@ -18,5 +23,5 @@ TAR_FILE=./datasets/$FILE.tar.gz
 TARGET_DIR=./datasets/$FILE/
 wget -N $URL -O $TAR_FILE
 mkdir -p $TARGET_DIR
-tar -zxvf $TAR_FILE -C ./datasets/
+tar -zxvf $TAR_FILE -C $TARGET_DIR
 rm $TAR_FILE
